@@ -1,0 +1,37 @@
+<section class="table-container">
+    <table>
+        <thead>
+          <tr class="row">
+            <th *ngFor="let col of cols">
+              {{ col.header }}
+              <app-badge 
+                *ngIf="col.help"
+                size="small" 
+                value="¡" 
+                [tooltip]="col.help" 
+                [tooltipText]="col.description!"></app-badge>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items" class="row">
+            <td *ngFor="let col of cols">
+              <div *ngIf="isImageUrl(item[col.field])" class="table-image">
+                <img  [src]="item[col.field]" [alt]="item.name">
+              </div>
+              <span *ngIf="!isImageUrl(item[col.field] )">
+                {{ item[col.field] }}
+              </span>
+              
+            </td>
+          </tr>
+          <!-- <tr *ngFor="let item of items" class="row">
+            <td><img src="{{ item.logo }}" alt="Logo"></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date_release }}</td>
+            <td>{{ item.date_revision }}</td>
+          </tr> -->
+        </tbody>
+    </table>
+</section>

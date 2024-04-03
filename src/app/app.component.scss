@@ -1,0 +1,23 @@
+.header {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header__logo {
+    height: 80%;
+    width: auto;
+    img {
+        height: 100%;
+    }
+}
+
+.main-content {
+    padding: 0.5rem;
+    width: 100%;
+    min-height: 90vh;
+}

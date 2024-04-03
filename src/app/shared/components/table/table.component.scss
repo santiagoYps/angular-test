@@ -1,0 +1,45 @@
+@import 'src/assets/styles/variables.scss';
+
+.table-container {
+    padding: 1.2rem;
+    background-color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    thead {
+        background-color: $bp-gray-2;
+
+        th {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+    }
+
+    .row {
+        height: 50px;
+        border-bottom: 2px solid $bp-gray-border;
+
+        td {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+    }
+}
+
+.table-image {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

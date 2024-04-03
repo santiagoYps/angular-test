@@ -1,0 +1,1 @@
+export const IMAGE_FORMATS = ['jpg', 'png', 'gif', 'jpeg', 'webp'];
