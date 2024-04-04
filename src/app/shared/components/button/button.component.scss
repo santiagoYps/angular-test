@@ -1,0 +1,26 @@
+@import 'src/assets/styles/variables.scss';
+
+.primary {
+    border: none;
+    background-color: $bp-yellow;
+    color: $bp-blue-dark;
+    cursor: pointer;
+}
+
+.secondary {
+    border: none;
+    background-color: $bp-blue-light;
+    color: $bp-blue-dark-1;
+    cursor: pointer;
+}
+
+
+.normal {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+}
+
+.large {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.6rem;
+}

@@ -1,0 +1,116 @@
+<section class="create-product">
+    <h2 class="title roboto-bold">
+        Formulario de registro
+    </h2>
+    <hr class="divider">
+    <form class="create-product__form" [formGroup]="productForm">
+
+        <section class="form__fields">
+            <div class="field">
+                <label for="idProduct" class="label roboto-medium">
+                    ID
+                </label>
+                <input appInput id="idProduct" formControlName="id" [invalid]="id.touched && id.invalid">
+                <div *ngIf="id.touched && id.invalid">
+                    <small class="help-text invalid" *ngIf="id.hasError('required')">
+                        Campo requerido
+                    </small>
+                    <small class="help-text invalid" *ngIf="id.hasError('minlength') || id.hasError('maxlength')">
+                        Campo requerido. Entre 3 y 10 caracteres.
+                    </small>
+                    <small class="help-text invalid" *ngIf="id.hasError('idAlreadyUsed')">
+                        El ID ya está en uso
+                    </small>
+                </div>
+            </div>
+    
+            <div class="field">
+                <label for="name" class="label roboto-medium">
+                    Nombre
+                </label>
+                <input appInput id="name" formControlName="name" [invalid]="name.touched && name.invalid">
+                <div *ngIf="name.touched && name.invalid">
+                    <small class="help-text invalid" *ngIf="name.hasError('required')">
+                        Campo requerido
+                    </small>
+                    <small class="help-text invalid" *ngIf="name.hasError('minlength') || name.hasError('maxlength')">
+                        Campo requerido. Entre 10 y 100 caracteres.
+                    </small>
+                </div>
+            </div>
+    
+            <div class="field">
+                <label for="description" class="label roboto-medium">
+                    Descripción
+                </label>
+                <input appInput id="description" formControlName="description" [invalid]="desc.touched && desc.invalid">
+                <div *ngIf="desc.touched && desc.invalid">
+                    <small class="help-text invalid" *ngIf="desc.hasError('required')">
+                        Campo requerido
+                    </small>
+                    <small class="help-text invalid" *ngIf="desc.hasError('minlength') || desc.hasError('maxlength')">
+                        Campo requerido. Entre 10 y 200 caracteres.
+                    </small>
+                </div>
+            </div>
+    
+            <div class="field">
+                <label for="logo" class="label roboto-medium">
+                    Logo
+                </label>
+                <input appInput id="logo" formControlName="logo" [invalid]="logo.invalid && logo.touched">
+                <div *ngIf="logo.touched && logo.invalid">
+                    <small class="help-text invalid" *ngIf="logo.hasError('required')">
+                        Campo requerido
+                    </small>
+                </div>
+            </div>
+    
+            <div class="field">
+                <label for="date-release" class="label roboto-medium">
+                    Fecha liberación
+                </label>
+                <input appInput id="date-release" formControlName="releaseDate" 
+                    type="date"
+                    [invalid]="release.invalid && release.touched"
+                >
+                <div *ngIf="release.touched && release.invalid">
+                    <small class="help-text invalid" *ngIf="release.hasError('required')">
+                        Campo requerido
+                    </small>
+                </div>
+            </div>
+    
+            <div class="field">
+                <label for="date-revision" class="label roboto-medium">
+                    Fecha revisión
+                </label>
+                <input appInput id="date-revision" formControlName="reviewDate" 
+                    type="date"
+                    [invalid]="review.invalid && review.touched"
+                >
+                <div *ngIf="review.touched && review.invalid">
+                    <small class="help-text invalid" *ngIf="review.hasError('required')">
+                        Campo requerido
+                    </small>
+                </div>
+            </div>    
+        </section>
+
+        <section class="form__buttons">
+            <app-button
+                size="large" 
+                type="secondary"
+                label="Cancelar"
+                [routerLink]="['/products']"
+            ></app-button>
+            <app-button
+                size="large" 
+                type="primary"
+                label="Agregar"
+            ></app-button>
+        </section>
+        
+    </form>
+        
+</section>

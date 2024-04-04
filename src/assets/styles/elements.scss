@@ -1,0 +1,37 @@
+@import 'src/assets/styles/variables.scss';
+
+
+.field {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+}
+
+.label {
+    font-size: 1.3rem;
+    color: $bp-blue-dark;
+    margin-bottom: 0.5rem;
+}
+
+.input {
+    padding: 0.8rem;
+    width: 100%;
+    font-size: 1.3rem;
+    border: 1px solid $bp-gray-dark;
+    border-radius: 5px;
+    color: $bp-blue-dark;
+
+    &.invalid {
+        border: 1px solid red;
+    }
+}
+
+.help-text {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: $bp-blue-dark;
+    
+    &.invalid {
+        color: red;
+    }
+}

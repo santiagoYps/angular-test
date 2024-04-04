@@ -1,10 +1,38 @@
-<section>
+<h2 class="title roboto-bold">
+    Productos
+</h2>
 
+<section class="product-actions">
+    <input type="text" name="" id="">
+    <app-button
+        size="normal" 
+        type="primary"
+        label="Agregar"
+        [routerLink]="['.', 'new']"
+    ></app-button>
+    <!-- <a class="product-actions__button roboto-medium"
+        [routerLink]="['/products', 'new']">
+        Nuevo producto
+    </a>     -->
 </section>
 
-<section>
-    <app-table
-        [items]="data"
-        [cols]="cols"
-    ></app-table>
-</section>
+<app-spinner 
+    *ngIf="loading; else table"
+    message="Cargando productos...">
+</app-spinner>
+
+<ng-template #table>
+    <section class="products-list">
+        <app-table
+            *ngIf="data.length > 0"
+            [items]="data"
+            [cols]="cols"
+        ></app-table>
+
+        <h3 *ngIf="data.length === 0"
+            class="products-list__empty roboto-medium">
+            No hay productos para mostrar
+        </h3>
+    </section>
+</ng-template>
+

@@ -1,0 +1,50 @@
+@import 'src/assets/styles/variables.scss';
+
+.create-product {
+    margin: 2rem auto; 
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    background-color: white;
+}
+
+.title {
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 2.5rem;
+    color: $bp-blue-dark;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: $bp-blue-dark;
+}
+
+.create-product__form {
+    padding: 2rem;
+    
+    .form__fields {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        .field {
+            flex-grow: 1;
+        }
+    }
+
+    .form__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    
+}
+
+
+

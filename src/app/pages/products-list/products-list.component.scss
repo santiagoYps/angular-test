@@ -1,0 +1,35 @@
+@import 'src/assets/styles/variables.scss';
+
+.title {
+    margin-top: 2rem;
+    margin-bottom: 2rem; 
+    text-align: center;
+    font-size: 2.5rem;
+    color: $bp-blue-dark;
+}
+
+.product-actions {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.products-list {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}
+
+.products-list__empty {
+    margin: 2rem 0 2rem 0;
+    align-self: center;
+    font-size: 1.8rem;
+    color: $bp-blue-dark
+}

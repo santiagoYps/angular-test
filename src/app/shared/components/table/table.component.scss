@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables.scss';
 
 .table-container {
-    padding: 1.2rem;
+    padding: 1.8rem;
     background-color: white;
 }
 
@@ -11,20 +11,24 @@ table {
     
     thead {
         background-color: $bp-gray-2;
-
-        th {
-            font-size: 1.3rem;
-            text-align: center;
-        }
     }
 
     .row {
         height: 50px;
         border-bottom: 2px solid $bp-gray-border;
 
+        th {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
         td {
             font-size: 1.3rem;
             text-align: center;
+            span {
+                font-size: inherit;
+                text-align: inherit;    
+            }
         }
     }
 }

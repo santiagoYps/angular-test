@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-type Size = 'small' | 'medium' | 'large';
-
 @Component({
   selector: 'app-badge',
   templateUrl: './badge.component.html',
