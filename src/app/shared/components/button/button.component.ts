@@ -16,6 +16,9 @@ export class ButtonComponent implements OnInit{
   @Input()
   label: string = '';
 
+  @Input()
+  disabled: boolean = false;
+
   classes!: Record<string, boolean>
 
   constructor() { }

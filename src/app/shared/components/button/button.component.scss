@@ -24,3 +24,9 @@
     padding: 1.5rem 2.5rem;
     font-size: 1.6rem;
 }
+
+button[disabled] {
+    background-color: darken($bp-yellow, 10%);
+    color: lighten($bp-blue-dark, 20%);
+    cursor: not-allowed;
+}

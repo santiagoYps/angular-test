@@ -1,3 +1,10 @@
+<app-button
+    class="back-button"
+    size="normal" 
+    type="secondary"
+    label="Ver productos"
+    [routerLink]="['/products']"
+></app-button>
 <section class="create-product">
     <h2 class="title roboto-bold">
         Formulario de registro
@@ -34,7 +41,7 @@
                         Campo requerido
                     </small>
                     <small class="help-text invalid" *ngIf="name.hasError('minlength') || name.hasError('maxlength')">
-                        Campo requerido. Entre 10 y 100 caracteres.
+                        Campo requerido. Entre 5 y 100 caracteres.
                     </small>
                 </div>
             </div>
@@ -78,6 +85,9 @@
                     <small class="help-text invalid" *ngIf="release.hasError('required')">
                         Campo requerido
                     </small>
+                    <small class="help-text invalid" *ngIf="release.hasError('pastDate')">
+                        La fecha debe ser hoy o posterior
+                    </small>
                 </div>
             </div>
     
@@ -101,13 +111,15 @@
             <app-button
                 size="large" 
                 type="secondary"
-                label="Cancelar"
-                [routerLink]="['/products']"
+                label="Reiniciar"
+                (click)="this.productForm.reset()"
             ></app-button>
             <app-button
                 size="large" 
                 type="primary"
                 label="Agregar"
+                [disabled]="productForm.invalid || id.status === 'PENDING'"
+                (click)="createProduct()"
             ></app-button>
         </section>
         

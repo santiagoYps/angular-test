@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Product } from '../interfaces/Product';
-import { catchError, from, retry, throwError } from 'rxjs';
+import { catchError, from, retry, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,10 @@ export class ProductsService {
 
   private URL_BASE = "https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros"
   private http = inject(HttpClient);
-  private AUTHOR_ID = "19967";
+  private AUTHOR_ID = "960806";
+  private commonHeader = {
+    'authorId': this.AUTHOR_ID
+  }
 
   constructor() { }
 
@@ -18,14 +21,14 @@ export class ProductsService {
   getAllProducts() {
     return this.http.get<Product[]>(`${this.URL_BASE}/bp/products`, {
       headers: {
-        'authorId': this.AUTHOR_ID
+        ...this.commonHeader
       }
     }).pipe(
-      catchError((error) => {
+      catchError((error: HttpErrorResponse) => {
         if (error.status === 400) {
           return throwError( () => new Error('Author Id requerido'));
         }
-        return throwError( ()=> new Error('Algo salió mal: ' + error.message));
+        return throwError( ()=> new Error('Algo salió mal: ' + error.error));
       })
     );
   }
@@ -36,12 +39,38 @@ export class ProductsService {
         id
       }
     }).pipe(
-      catchError((error) => {
+      catchError((error: HttpErrorResponse) => {
         if (error.status === 400) {
           return throwError( () => new Error('Id del producto requerido requerido'));
         }
-        return throwError( ()=> new Error('Algo salió mal: ' + error.message));
+        return throwError( ()=> new Error('Algo salió mal: ' + error.error));
       })
+    );
+  }
+
+  createroduct(product: Product) {
+    return this.http.post<Product>(`${this.URL_BASE}/bp/products`, product, {
+      observe: 'response',
+      headers: {
+        ...this.commonHeader
+      },
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          return throwError( () => new Error(error.error));
+        }
+        return throwError( ()=> new Error('Algo salió mal: ' + error.error));
+      }),
+      switchMap( (resp: HttpResponse<Product>) => {
+        if (resp.status === 206) {
+          let stringError = Object.keys(resp.body!).reduce((acc, key) => {
+            return acc + `${key}, `;
+          }, "Los campos: ");
+          stringError += " son obligatorios."
+          return throwError( () => new Error(stringError));
+        }
+        return from([resp.body!]);
+      }),
     );
   }
 }

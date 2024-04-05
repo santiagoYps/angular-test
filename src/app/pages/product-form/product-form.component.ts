@@ -1,5 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { addYears } from 'date-fns';
+import { Product } from 'src/app/interfaces/Product';
+import { ProductsService } from 'src/app/services/products.service';
 import { IdValidator } from 'src/app/utils/validators/IdValidator';
 import { currentOrFutureDateValidator } from 'src/app/utils/validators/date.validator';
 
@@ -10,17 +13,30 @@ import { currentOrFutureDateValidator } from 'src/app/utils/validators/date.vali
 })
 export class ProductFormComponent implements OnInit{
 
+  private productsService = inject(ProductsService);
   private idValidator = inject(IdValidator);
 
   productForm!: FormGroup;
+
+  enableSubmit = false;
   
   constructor() {
     this.initForm();
+    this.review.disable();
   }
 
   ngOnInit(): void {
-    // this.id.statusChanges.subscribe( status => {
-    // });
+    this.release.valueChanges.subscribe( value => {
+      try {
+        const releaseDate = this.strToDate(value)
+        const reviewDate = addYears(releaseDate, 1);
+        this.review.setValue(reviewDate.toISOString().split('T')[0]);
+      }
+      catch (error) {
+        this.review.reset();
+      }
+      
+    });
   }
 
   get id() {
@@ -47,6 +63,31 @@ export class ProductFormComponent implements OnInit{
     return this.productForm.get('reviewDate') as FormControl;
   }
 
+  createProduct() {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+    }
+    else {
+      const product = {
+        id: this.id.value as string,
+        name: this.name.value as string,
+        description: this.desc.value as string,
+        logo: this.logo.value as string,
+        date_release: this.strToDate(this.release.value),
+        date_revision: this.strToDate(this.review.value),
+      } as Product;
+
+      this.productsService.createroduct(product).subscribe({
+        next: (product) => {
+          console.log('Producto creado:', product);
+        },
+        error: (error) => {
+          console.error('Error al crear el producto: ', error);
+        }
+      });
+    }
+  }
+
 
   initForm() {
     this.productForm = new FormGroup({
@@ -56,11 +97,16 @@ export class ProductFormComponent implements OnInit{
         updateOn: 'blur',
       }),
       name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
       logo: new FormControl('', [Validators.required]),
-      releaseDate: new FormControl('', [Validators.required, currentOrFutureDateValidator]),
+      releaseDate: new FormControl('', [Validators.required, currentOrFutureDateValidator() ]),
       reviewDate: new FormControl('', [Validators.required])
     });
+  }
+
+  strToDate(strDate: string){
+    const [year, month, day] = strDate.split('-').map(Number);
+    return new Date(year, month - 1, day);
   }
 
 }

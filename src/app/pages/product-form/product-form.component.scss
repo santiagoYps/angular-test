@@ -1,5 +1,11 @@
 @import 'src/assets/styles/variables.scss';
 
+.back-button {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+}
+
 .create-product {
     margin: 2rem auto; 
     width: 90%;
