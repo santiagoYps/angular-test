@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { IMAGE_FORMATS } from '@shared/constants/table.constant';
 import { Column } from '@shared/types/table.type';
 
@@ -21,11 +22,26 @@ export class TableComponent implements OnInit, OnChanges {
   @Input()
   searchValue: string = '';
 
+  @Input()
+  shownItemsAmount: number[] = [];
+
   private filterActive = false;
   itemsToShow: any[] = [];
 
+  amountItemsInput = new FormControl();
+
   ngOnInit(): void {
+    const initialAmount = this.shownItemsAmount.length > 0 ? this.shownItemsAmount[0] : this.items.length;
+    this.amountItemsInput.setValue(initialAmount);
+    
     this.itemsToShow = this.items;
+    this.sliceItems();
+    if (this.shownItemsAmount.length > 0){
+      this.amountItemsInput.valueChanges.subscribe((value) => {
+        this.itemsToShow = this.items;
+        this.sliceItems();
+      });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,15 +54,21 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
+  sliceItems(): void {
+    this.itemsToShow = this.itemsToShow.slice(0, this.amountItemsInput.value);
+  }
+
   filterItems(value: string): void {
     if (!this.filterActive) return;
     if (value === '') {
       this.itemsToShow = this.items;
+      this.sliceItems();
       return;
     }
     this.itemsToShow = this.items.filter(item => {
       return item[this.filterField!].toString().toLowerCase().includes(value.toLowerCase());
-    });
+    });    
+    this.sliceItems();
   }
 
   isImageUrl(value: unknown): boolean {

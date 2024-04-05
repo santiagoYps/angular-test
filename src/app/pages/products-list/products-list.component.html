@@ -16,10 +16,6 @@
         label="Agregar"
         [routerLink]="['.', 'new']"
     ></app-button>
-    <!-- <a class="product-actions__button roboto-medium"
-        [routerLink]="['/products', 'new']">
-        Nuevo producto
-    </a>     -->
 </section>
 
 <app-spinner 
@@ -35,6 +31,7 @@
             [cols]="cols"
             filterField="name"
             [searchValue]="searchProductValue"
+            [shownItemsAmount]="[5,10,20]"
         ></app-table>
 
         <h3 *ngIf="data.length === 0"

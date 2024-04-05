@@ -27,4 +27,17 @@
           </tr>
         </tbody>
     </table>
+
+    <div class="pagination">
+      <p class="pagination__total">{{items.length}} resultados totales</p>
+      <select *ngIf="shownItemsAmount.length > 0"
+        name="itemsToList" id="itemsToList" class="pagination__amount"
+        [formControl]="amountItemsInput">
+        <option 
+          *ngFor="let n of shownItemsAmount" 
+          [value]="n">
+          {{ n }}
+        </option>
+      </select>
+    </div>
 </section>
