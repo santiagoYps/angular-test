@@ -48,7 +48,7 @@ export class ProductsService {
     );
   }
 
-  createroduct(product: Product) {
+  createProduct(product: Product) {
     return this.http.post<Product>(`${this.URL_BASE}/bp/products`, product, {
       observe: 'response',
       headers: {

@@ -77,15 +77,24 @@ export class ProductFormComponent implements OnInit{
         date_revision: this.strToDate(this.review.value),
       } as Product;
 
-      this.productsService.createroduct(product).subscribe({
+      this.productsService.createProduct(product).subscribe({
         next: (product) => {
-          console.log('Producto creado:', product);
+          alert('Producto creado con éxito');
+          this.resetForm();
         },
-        error: (error) => {
-          console.error('Error al crear el producto: ', error);
+        error: (error: Error) => {
+          //console.error('Error al crear el producto: ', error);
+          alert('Error: ' + error.message);
         }
       });
     }
+  }
+
+  resetForm() {
+    this.productForm.reset();
+    this.review.enable();
+    this.review.reset();
+    this.review.disable();
   }
 
 

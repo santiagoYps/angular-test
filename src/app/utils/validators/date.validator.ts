@@ -3,6 +3,9 @@ import { isAfter, isToday, startOfDay } from "date-fns";
 
 export function currentOrFutureDateValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) {
+      return null;
+    }
     const dateStr: string = control.value; 
     const [year, month, day] = dateStr.split('-').map(Number);
     const selectedDate: Date = new Date(year, month - 1, day);
