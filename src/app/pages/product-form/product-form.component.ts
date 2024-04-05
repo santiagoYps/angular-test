@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { addYears } from 'date-fns';
-import { Product } from 'src/app/models/Product';
-import { ProductsService } from 'src/app/services/products.service';
-import { IdValidator } from 'src/app/utils/validators/IdValidator';
-import { currentOrFutureDateValidator } from 'src/app/utils/validators/date.validator';
+import { Product } from '../../models/Product';
+import { ProductsService } from '../../services/products.service';
+import { IdValidator } from '../../utils/validators/IdValidator'; 
+import { currentOrFutureDateValidator } from '../../utils/validators/date.validator';
 
 @Component({
   selector: 'app-product-form',

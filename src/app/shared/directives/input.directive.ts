@@ -11,7 +11,7 @@ export class InputDirective implements OnInit {
   @Input()
   type!: string ;
 
-  private element = this.el.nativeElement as HTMLInputElement;
+  protected element = this.el.nativeElement as HTMLInputElement;
 
   constructor(private el: ElementRef) { 
     this.element.classList.add('input');
@@ -29,7 +29,7 @@ export class InputDirective implements OnInit {
     }
   }
 
-  private validateStatus() {
+  protected validateStatus() {
     this.invalid 
     ? this.element.classList.add('invalid')
     : this.element.classList.remove('invalid');

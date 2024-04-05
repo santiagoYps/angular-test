@@ -2,8 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Column } from '@shared/types/table.type';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs';
-import { Product } from 'src/app/models/Product';
-import { ProductsService } from 'src/app/services/products.service';
+import { Product } from '../../models/Product';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-products-list',
@@ -43,7 +43,7 @@ export class ProductsListComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        console.error(error);
+        console.log(error.message);
         this.loading = false;
       }
     });
