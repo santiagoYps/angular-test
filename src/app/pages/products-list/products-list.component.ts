@@ -72,17 +72,20 @@ export class ProductsListComponent implements OnInit {
       {
         field: 'description',
         header: 'Descripción',
-        help: false
+        help: true,
+        description: 'Descripción del producto'
       },
       {
         field: 'shortReleaseDate',
         header: 'Fecha de liberación',
-        help: false
+        help: true,
+        description: 'Fecha de liberación del producto'
       },
       {
         field: 'shortRevisionDate',
         header: 'Fecha de reestructuración',
-        help: false
+        help: true,
+        description: 'Fecha de reestructuración del producto'
       }
     ]
   }
