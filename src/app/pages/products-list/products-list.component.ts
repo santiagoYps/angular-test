@@ -1,5 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Column } from '@shared/types/table.type';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { Product } from 'src/app/models/Product';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -15,6 +17,9 @@ export class ProductsListComponent implements OnInit {
   loading = false;
   cols!: Column[];
   data: Product[] = [ ];
+
+  searchProductInput = new FormControl('', {nonNullable: true});
+  searchProductValue = '';
 
   constructor() { 
     this.initColumns();
@@ -41,6 +46,14 @@ export class ProductsListComponent implements OnInit {
         console.error(error);
         this.loading = false;
       }
+    });
+
+    this.searchProductInput.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map((value) => value.trim()),
+    ).subscribe((value) => {
+      this.searchProductValue = value;
     });
   }
 

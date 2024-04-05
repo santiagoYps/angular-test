@@ -3,7 +3,13 @@
 </h2>
 
 <section class="product-actions">
-    <input type="text" name="" id="">
+    <div class="field">
+        <label for="search" class="label roboto-medium">
+            Buscar producto
+        </label>
+        <input appInput id="search" [formControl]="searchProductInput" placeholder="Ingrese nombre" autocomplete="off">
+    </div>
+
     <app-button
         size="normal" 
         type="primary"
@@ -27,6 +33,8 @@
             *ngIf="data.length > 0"
             [items]="data"
             [cols]="cols"
+            filterField="name"
+            [searchValue]="searchProductValue"
         ></app-table>
 
         <h3 *ngIf="data.length === 0"
