@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Product } from '../interfaces/Product';
+import { Product } from '../models/Product';
 import { catchError, from, retry, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({

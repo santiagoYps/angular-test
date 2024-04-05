@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { addYears } from 'date-fns';
-import { Product } from 'src/app/interfaces/Product';
+import { Product } from 'src/app/models/Product';
 import { ProductsService } from 'src/app/services/products.service';
 import { IdValidator } from 'src/app/utils/validators/IdValidator';
 import { currentOrFutureDateValidator } from 'src/app/utils/validators/date.validator';

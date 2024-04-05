@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Column } from '@shared/types/table.type';
-import { Product } from 'src/app/interfaces/Product';
+import { Product } from 'src/app/models/Product';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -22,10 +22,19 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.productService.getAllProducts().subscribe({
+    this.productService.getAllProducts()
+    .subscribe({
       next: (products) => {
-        this.data = products;
-        //this.addDummyData();
+        this.data = products.map( product => {
+          return new Product(
+            product.id,
+            product.name,
+            product.description,
+            product.logo,
+            new Date(product.date_release),
+            new Date(product.date_revision)
+          );
+        });
         this.loading = false;
       },
       error: (error) => {
@@ -53,26 +62,16 @@ export class ProductsListComponent implements OnInit {
         help: false
       },
       {
-        field: 'date_release',
+        field: 'shortReleaseDate',
         header: 'Fecha de liberación',
         help: false
       },
       {
-        field: 'date_revision',
+        field: 'shortRevisionDate',
         header: 'Fecha de reestructuración',
         help: false
       }
     ]
   }
 
-  addDummyData() {
-    this.data.push({
-      id: '1',
-      logo: 'https://picsum.photos/100/100.jpg',
-      name: 'Product 1',
-      description: 'Description of Product 1',
-      date_release: new Date(),
-      date_revision: new Date()
-    });
-  }  
 }
