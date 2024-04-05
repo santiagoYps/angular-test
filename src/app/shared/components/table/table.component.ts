@@ -11,10 +11,10 @@ import { Column } from '@shared/types/table.type';
 export class TableComponent implements OnInit, OnChanges {
 
   @Input()
-  cols!: Column[];
+  cols: Column[] = [];
 
   @Input()
-  items!: any[];
+  items: any[] = [];
 
   @Input()
   filterField: string | null = null;
@@ -25,7 +25,7 @@ export class TableComponent implements OnInit, OnChanges {
   @Input()
   shownItemsAmount: number[] = [];
 
-  private filterActive = false;
+  protected filterActive = false;
   itemsToShow: any[] = [];
 
   amountItemsInput = new FormControl();
