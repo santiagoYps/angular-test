@@ -2,20 +2,20 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { Injectable, inject } from '@angular/core';
 import { Product } from '../models/Product';
 import { catchError, from, retry, switchMap, tap, throwError } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private URL_BASE = "https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros"
-  private http = inject(HttpClient);
+  private URL_BASE = environment.API_URL;
   private AUTHOR_ID = "960806";
   private commonHeader = {
     'authorId': this.AUTHOR_ID
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
   getAllProducts() {

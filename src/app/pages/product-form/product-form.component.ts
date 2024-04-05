@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { addYears } from 'date-fns';
 import { Product } from '../../models/Product';
@@ -13,14 +13,11 @@ import { currentOrFutureDateValidator } from '../../utils/validators/date.valida
 })
 export class ProductFormComponent implements OnInit{
 
-  private productsService = inject(ProductsService);
-  private idValidator = inject(IdValidator);
-
   productForm!: FormGroup;
 
   enableSubmit = false;
   
-  constructor() {
+  constructor(private productsService: ProductsService, private idValidator: IdValidator) {
     this.initForm();
     this.review.disable();
   }

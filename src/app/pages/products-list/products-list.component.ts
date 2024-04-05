@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Column } from '@shared/types/table.type';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs';
@@ -12,8 +12,6 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductsListComponent implements OnInit {
 
-  private productService = inject(ProductsService);
-
   loading = false;
   cols!: Column[];
   data: Product[] = [ ];
@@ -21,7 +19,7 @@ export class ProductsListComponent implements OnInit {
   searchProductInput = new FormControl('', {nonNullable: true});
   searchProductValue = '';
 
-  constructor() { 
+  constructor(private productService: ProductsService) { 
     this.initColumns();
   }
 
