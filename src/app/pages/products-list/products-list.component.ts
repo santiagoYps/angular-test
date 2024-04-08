@@ -60,29 +60,34 @@ export class ProductsListComponent implements OnInit {
       {
         field: 'logo',
         header: 'Logo',
+        type: 'img',
         help: false
       },
       {
         field: 'name',
         header: 'Nombre del producto',
+        type: 'text',
         help: false
       },
       {
         field: 'description',
         header: 'Descripción',
         help: true,
+        type: 'text',
         description: 'Descripción del producto'
       },
       {
         field: 'shortReleaseDate',
         header: 'Fecha de liberación',
         help: true,
+        type: 'text',
         description: 'Fecha de liberación del producto'
       },
       {
         field: 'shortRevisionDate',
         header: 'Fecha de reestructuración',
         help: true,
+        type: 'text',
         description: 'Fecha de reestructuración del producto'
       }
     ]

@@ -14,14 +14,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of itemsToShow" class="row">
+          <tr *ngFor="let item of itemsToShow; let i = index" class="row">
             <td *ngFor="let col of cols">
-              <div *ngIf="isImageUrl(item[col.field])" class="table-image">
+              <div *ngIf="col.type === 'img'" class="table-image">
+                <img  [src]="item[col.field]" [alt]="item.name" (error)="defaultImg($event, i, col.field)">
+              </div>
+              <span *ngIf="col.type === 'text'">
+                {{ item[col.field] }}
+              </span>
+              <!-- <div *ngIf="isImageUrl(item[col.field])" class="table-image">
                 <img  [src]="item[col.field]" [alt]="item.name">
               </div>
               <span *ngIf="!isImageUrl(item[col.field] )">
                 {{ item[col.field] }}
-              </span>
+              </span> -->
               
             </td>
           </tr>

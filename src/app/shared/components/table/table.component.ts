@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IMAGE_FORMATS } from '@shared/constants/table.constant';
+import { DEFAULT_IMG, IMAGE_FORMATS } from '@shared/constants/table.constant';
 import { Column } from '@shared/types/table.type';
 
 @Component({
@@ -71,10 +71,14 @@ export class TableComponent implements OnInit, OnChanges {
     this.sliceItems();
   }
 
-  isImageUrl(value: unknown): boolean {
-    return typeof value === 'string' && IMAGE_FORMATS.includes(value.split('.').pop()?.toLocaleLowerCase()!);
+  defaultImg(a: ErrorEvent, itemIndex: number, field: string) {
+    this.items[itemIndex][field] = DEFAULT_IMG;
   }
 
-
+  validateImgUrl(value: unknown): string {
+    return typeof value === 'string' && IMAGE_FORMATS.includes(value.split('.').pop()?.toLocaleLowerCase()!)
+    ? value
+    : DEFAULT_IMG;
+  }
 
 }
